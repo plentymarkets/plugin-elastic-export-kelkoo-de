@@ -16,10 +16,10 @@
   "categories": [
     "3523"
   ],
-  "version": "1.0.4",
+  "version": "1.0.0",
   "require": ["ElasticExport"],
   "marketplaceName": {
-    "de": "Kelkoo",
-    "en": "Kelkoo"
+    "de": "Kelkoo.de",
+    "en": "Kelkoo.de"
   }
 }
