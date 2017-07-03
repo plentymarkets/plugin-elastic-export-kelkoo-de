@@ -1,0 +1,25 @@
+{
+  "name": "ElasticExportKelkooDE",
+  "description": "This plugin adds the format KelkooDE to the Elastic Export.",
+  "namespace": "ElasticExportKelkooDE",
+  "author": "plentymarkets GmbH",
+  "type": "export",
+  "authorIcon": "icon_author_xs.png",
+  "serviceProvider": "ElasticExportKelkooDE\\ElasticExportKelkooDEServiceProvider",
+  "license": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007",
+  "pluginIcon": "icon_plugin_md.png",
+  "price": 0.00,
+  "shortDescription": {
+    "de": "Das Plugin ElasticExportKelkooDE fügt das Datenformat KelkooDE zum Elastischen Export hinzu.",
+    "en": "This plugin adds the format KelkooDE to the Elastic Export."
+  },
+  "categories": [
+    "3523"
+  ],
+  "version": "1.0.4",
+  "require": ["ElasticExport"],
+  "marketplaceName": {
+    "de": "Kelkoo",
+    "en": "Kelkoo"
+  }
+}
