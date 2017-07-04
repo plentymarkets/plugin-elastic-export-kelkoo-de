@@ -9,6 +9,7 @@ use Plenty\Modules\DataExchange\Contracts\CSVPluginGenerator;
 use Plenty\Modules\Helper\Services\ArrayHelper;
 use Plenty\Modules\DataExchange\Models\FormatSetting;
 use Plenty\Modules\Helper\Models\KeyValue;
+use Plenty\Modules\Item\Manufacturer\Contracts\ManufacturerRepositoryContract;
 use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchScrollRepositoryContract;
 use Plenty\Plugin\Log\Loggable;
 
@@ -21,70 +22,78 @@ class KelkooDE extends CSVPluginGenerator
 {
 	use Loggable;
 
-    /**
-     * @var ElasticExportCoreHelper $elasticExportHelper
-     */
-    private $elasticExportHelper;
+	const KELKOO_DE = 6.00;
+
+	/**
+	 * @var ElasticExportCoreHelper $elasticExportHelper
+	 */
+	private $elasticExportHelper;
 
 	/**
 	 * @var ElasticExportStockHelper $elasticExportStockHelper
 	 */
-    private $elasticExportStockHelper;
+	private $elasticExportStockHelper;
 
 	/**
 	 * @var ElasticExportPriceHelper $elasticExportPriceHelper
 	 */
-    private $elasticExportPriceHelper;
+	private $elasticExportPriceHelper;
 
-    /**
-     * @var ArrayHelper $arrayHelper
-     */
-    private $arrayHelper;
+	/**
+	 * @var ArrayHelper $arrayHelper
+	 */
+	private $arrayHelper;
 
-    /**
-     * KelkooDE constructor.
+	/**
+	 * KelkooDE constructor.
 	 *
-     * @param ArrayHelper $arrayHelper
-     */
-    public function __construct(ArrayHelper $arrayHelper)
-    {
-        $this->arrayHelper = $arrayHelper;
-    }
+	 * @param ArrayHelper $arrayHelper
+	 */
+	public function __construct(ArrayHelper $arrayHelper)
+	{
+		$this->arrayHelper = $arrayHelper;
+	}
 
-    /**
-     * @param VariationElasticSearchScrollRepositoryContract $elasticSearch
-     * @param array $formatSettings
-     * @param array $filter
-     */
-    protected function generatePluginContent($elasticSearch, array $formatSettings = [], array $filter = [])
-    {
-        $this->elasticExportHelper = pluginApp(ElasticExportCoreHelper::class);
-        $this->elasticExportStockHelper = pluginApp(ElasticExportStockHelper::class);
-        $this->elasticExportPriceHelper = pluginApp(ElasticExportPriceHelper::class);
+	/**
+	 * @param VariationElasticSearchScrollRepositoryContract $elasticSearch
+	 * @param array $formatSettings
+	 * @param array $filter
+	 */
+	protected function generatePluginContent($elasticSearch, array $formatSettings = [], array $filter = [])
+	{
+		$this->elasticExportHelper = pluginApp(ElasticExportCoreHelper::class);
+		$this->elasticExportStockHelper = pluginApp(ElasticExportStockHelper::class);
+		$this->elasticExportPriceHelper = pluginApp(ElasticExportPriceHelper::class);
 
 		$settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
-		$this->setDelimiter(" ");
+		$this->setDelimiter("	");		// tab
 
 		$this->addCSVContent([
-			'url',
+			'offer-id',
 			'title',
-			'description',
+			'product-url',
 			'price',
-			'offerid',
-			'image',
-			'availability',
-			'deliverycost',
-			'deliveryTime',
-			'unitaryPrice',
+			'brand',
+			'description',
+			'image-url',
 			'ean',
+			'merchant-category',
+			'availability',
+			'delivery-cost',
+			'delivery-time',
 			'ecotax',
+			'mpn',
+			'unit-price',
+			'image-url-2',
+			'image-url-3',
+			'image-url-4',
 		]);
 
-        $limitReached = false;
-        $lines = 0;
-        $startTime = microtime(true);
+		$limitReached = false;
+		$lines = 0;
+		$startTime = microtime(true);
 
-        if($elasticSearch instanceof VariationElasticSearchScrollRepositoryContract)
+		if($elasticSearch instanceof VariationElasticSearchScrollRepositoryContract)
 		{
 			do
 			{
@@ -153,19 +162,19 @@ class KelkooDE extends CSVPluginGenerator
 		$this->getLogger(__METHOD__)->debug('ElasticExportKelkooDE::log.fileGenerationDuration', [
 			'Whole file generation duration' => microtime(true) - $startTime,
 		]);
-    }
+	}
 
 	/**
 	 * @var array $item
 	 * @var KeyValue $settings
 	 */
-    private function buildRow($item, $settings)
+	private function buildRow($item, $settings)
 	{
 		$deliveryCost = $this->elasticExportHelper->getShippingCost($item['data']['item']['id'], $settings);
 
 		if(!is_null($deliveryCost))
 		{
-			$deliveryCost = number_format((float)$deliveryCost, 2, ',', '');
+			$deliveryCost = number_format((float)$deliveryCost, 2, '.', '');
 		}
 		else
 		{
@@ -175,20 +184,68 @@ class KelkooDE extends CSVPluginGenerator
 		$priceList = $this->elasticExportPriceHelper->getPriceList($item, $settings, 2, '.');
 
 		$data = [
-			'url' 		    => $this->elasticExportHelper->getMutatedUrl($item, $settings, true, false),
-			'title' 		=> $this->elasticExportHelper->getMutatedName($item, $settings, 80),
-			'description'   => $this->elasticExportHelper->getMutatedDescription($item, $settings, 160),
-			'price' 	    => $priceList['price'],
-			'offerid'       => $item['id'],
-			'image'		    => $this->elasticExportHelper->getMainImage($item, $settings),
-			'availability'  => $this->elasticExportHelper->getAvailability($item, $settings, false),
-			'deliverycost' 	=> $deliveryCost,
-			'deliveryTime' 	=> $this->elasticExportHelper->getAvailability($item, $settings),
-			'unitaryPrice'  => $this->elasticExportPriceHelper->getBasePrice($item, $priceList['price']),
-			'ean'           => $this->elasticExportHelper->getBarcodeByType($item, $settings->get('barcode')),
-			'ecotax'        => ''
+			'offer-id'			=> $this->elasticExportHelper->generateSku($item['id'], $settings->get('referrerId') ? $settings->get('referrerId') : self::KELKOO_DE),
+			'title'		 		=> $this->elasticExportHelper->getMutatedName($item, $settings, 80),
+			'product-url'	    => $this->elasticExportHelper->getMutatedUrl($item, $settings, true, false),
+			'price'				=> $priceList['price'],
+			'brand'				=> $this->elasticExportHelper->getExternalManufacturerName((int)$item['data']['item']['manufacturer']['id'], true),
+			'description'   	=> $this->elasticExportHelper->getMutatedDescription($item, $settings, 300),
+			'image-url'			=> $this->getImageByPosition($item, 1),
+			'ean'				=> $this->elasticExportHelper->getBarcodeByType($item, $settings->get('barcode')),
+			'merchant-category'	=> $this->elasticExportHelper->getSingleCategory((int)$item['data']['defaultCategories'][0]['id'], (string)$settings->get('lang'), (int)$settings->get('plentyId')),
+			'availability'		=> $this->elasticExportHelper->getAvailability($item, $settings, false),
+			'delivery-cost'		=> $deliveryCost,
+			'delivery-time'		=> $this->elasticExportHelper->getAvailability($item, $settings),
+			'ecotax'			=> '',
+			'mpn'				=> $priceList['recommendedRetailPrice'],
+			'unit-price'		=> $this->elasticExportPriceHelper->getBasePrice($item, $priceList['price']),
+			'image-url-2'		=> $this->getImageByPosition($item, 2),
+			'image-url-3'		=> $this->getImageByPosition($item, 3),
+			'image-url-4'		=> $this->getImageByPosition($item, 4),
 		];
 
 		$this->addCSVContent(array_values($data));
+	}
+
+	/**
+	 * Returns the URL of an image depending on the configured position.
+	 *
+	 * Fallback in case of no found image with position x to entry x in list.
+	 *
+	 * @param array $item
+	 * @param int $position
+	 * @return string
+	 */
+	private function getImageByPosition($item, int $position):string
+	{
+		if(is_array($item['data']['images']['all']) && count($item['data']['images']['all']) > 0)
+		{
+			$count = 0;
+			$images = [];
+
+			foreach($item['data']['images']['all'] as $image)
+			{
+				if(!array_key_exists($image['position'], $images))
+				{
+					$images[$image['position']] = $image;
+				}
+				else
+				{
+					$count++;
+					$images[$image['position'].'_'.$count] = $image;
+				}
+			}
+
+			// sort by key
+			ksort($images);
+			$images = array_values($images);
+
+			if(isset($images[$position]))
+			{
+				return (string)$this->elasticExportHelper->getImageUrlBySize($images[$position]);
+			}
+		}
+
+		return '';
 	}
 }
