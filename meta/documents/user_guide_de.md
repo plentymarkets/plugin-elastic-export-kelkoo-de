@@ -11,7 +11,7 @@ Kelkoo ist eine Preisvergleich-Suchmaschine für Shopping und Reisen. Die Basis-
 
 Um dieses Format nutzen zu können, benötigen Sie das Plugin Elastic Export.
 
-Auf der Handbuchseite [Daten exportieren](https://www.plentymarkets.eu/handbuch/datenaustausch/daten-exportieren/#4) werden allgemein die einzelnen Formateinstellungen beschrieben.
+Auf der Handbuchseite [Daten exportieren](https://www.plentymarkets.eu/handbuch/datenaustausch/daten-exportieren/#4) werden die einzelnen Formateinstellungen beschrieben.
 
 In der folgenden Tabelle finden Sie spezifische Hinweise zu den Einstellungen, Formateinstellungen und empfohlenen Artikelfiltern für das Format **KelkooDE-Plugin**. 
 
@@ -34,7 +34,7 @@ In der folgenden Tabelle finden Sie spezifische Hinweise zu den Einstellungen, F
             Format
         </td>
         <td>
-            Das Format <b>KelkooDE-Plugin</b> wählen.
+            <b>KelkooDE-Plugin</b> wählen.
         </td>        
     </tr>
     <tr>
@@ -42,7 +42,7 @@ In der folgenden Tabelle finden Sie spezifische Hinweise zu den Einstellungen, F
             Bereitstellung
         </td>
         <td>
-            Die Bereitstellung <b>URL</b> wählen.
+            <b>URL</b> wählen.
         </td>        
     </tr>
     <tr>
@@ -63,7 +63,7 @@ In der folgenden Tabelle finden Sie spezifische Hinweise zu den Einstellungen, F
             Aktiv
         </td>
         <td>
-            <b>Aktiv</b> auswählen.
+            <b>Aktiv</b> wählen.
         </td>        
     </tr>
     <tr>
@@ -71,7 +71,7 @@ In der folgenden Tabelle finden Sie spezifische Hinweise zu den Einstellungen, F
             Märkte
         </td>
         <td>
-            Eine oder mehrere Auftragsherkünfte auswählen, die alle an der Variante aktiviert sein müssen, damit der Artikel exportiert wird.
+            Eine oder mehrere Auftragsherkünfte wählen. Die gewählten Auftragsherkünfte müssen an der Variante aktiviert sein, damit der Artikel exportiert wird.
         </td>        
     </tr>
     <tr>
@@ -84,7 +84,7 @@ In der folgenden Tabelle finden Sie spezifische Hinweise zu den Einstellungen, F
             Auftragsherkunft
         </td>
         <td>
-            Die Auftragsherkunft auswählen, die beim Auftragsimport zugeordnet werden soll.
+            Die Auftragsherkunft wählen, die beim Auftragsimport zugeordnet werden soll.
         </td>        
     </tr>
     <tr>
@@ -100,7 +100,7 @@ In der folgenden Tabelle finden Sie spezifische Hinweise zu den Einstellungen, F
             Bild
         </td>
         <td>
-            <b>Erstes Bild</b> auswählen.
+            <b>Erstes Bild</b> wählen.
         </td>        
     </tr>
     <tr>
@@ -132,8 +132,8 @@ In der folgenden Tabelle finden Sie spezifische Hinweise zu den Einstellungen, F
             Artikelverfügbarkeit überschreiben
         </td>
         <td>
-            Dies muss aktiviert sein, da Kelkoo nur spezifische Werte akzeptiert, die hier eingetragen werden müssen.<br> 
-            Weitere Informationen dazu im Abschnitt <b>3 Übersicht der verfügbaren Spalten</b> bei der Spalte <b>availability</b>.
+            Diese Einstellung muss aktiviert sein, da Kelkoo nur spezifische Werte akzeptiert, die hier eingetragen werden müssen.<br> 
+            Weitere Informationen dazu in Kapitel <b>Übersicht der verfügbaren Spalten</b>.
         </td>        
     </tr>
 </table>
@@ -226,7 +226,7 @@ In der folgenden Tabelle finden Sie spezifische Hinweise zu den Einstellungen, F
             merchant-category
         </td>
         <td>
-            <b>Inhalt:</b> Der <b>Name der letzten Kategorieebene</b> des <b>Kategoriepfads der Standard-Kategorie</b> für den, in den Formateinstellungen definierten <b>Mandanten</b>.
+            <b>Inhalt:</b> Der <b>Name der letzten Kategorieebene</b> des <b>Kategoriepfads der Standard-Kategorie</b> für den in den Formateinstellungen definierten <b>Mandanten</b>.
         </td>        
     </tr>
     <tr>
