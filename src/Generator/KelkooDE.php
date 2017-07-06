@@ -188,7 +188,7 @@ class KelkooDE extends CSVPluginGenerator
 			'title'		 		=> $this->elasticExportHelper->getMutatedName($item, $settings, 80),
 			'product-url'	    => $this->elasticExportHelper->getMutatedUrl($item, $settings, true, false),
 			'price'				=> $priceList['price'],
-			'brand'				=> $this->elasticExportHelper->getExternalManufacturerName((int)$item['data']['item']['manufacturer']['id'], true),
+			'brand'				=> $this->elasticExportHelper->getExternalManufacturerName((int)$item['data']['item']['manufacturer']['id']),
 			'description'   	=> $this->elasticExportHelper->getMutatedDescription($item, $settings, 300),
 			'image-url'			=> $this->getImageByPosition($item, 0),
 			'ean'				=> $this->elasticExportHelper->getBarcodeByType($item, $settings->get('barcode')),
