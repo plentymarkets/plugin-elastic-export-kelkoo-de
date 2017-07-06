@@ -144,12 +144,12 @@ class KelkooDE extends ResultFields
                 'variation.model',
 
                 //images
-                'images.item.urlMiddle',
-                'images.item.urlPreview',
-                'images.item.urlSecondPreview',
-                'images.item.url',
-                'images.item.path',
-                'images.item.position',
+                'images.all.urlMiddle',
+                'images.all.urlPreview',
+                'images.all.urlSecondPreview',
+                'images.all.url',
+                'images.all.path',
+                'images.all.position',
 
                 'images.variation.urlMiddle',
                 'images.variation.urlPreview',
@@ -228,6 +228,7 @@ class KelkooDE extends ResultFields
 		$nestedKeyList['keys'] = [
 			//images
 			'images.all',
+			'images.variation',
 
 			//sku
 			'skus',
@@ -247,6 +248,15 @@ class KelkooDE extends ResultFields
 
 		$nestedKeyList['nestedKeys'] = [
 			'images.all' => [
+				'urlMiddle',
+				'urlPreview',
+				'urlSecondPreview',
+				'url',
+				'path',
+				'position',
+			],
+
+			'images.variation' => [
 				'urlMiddle',
 				'urlPreview',
 				'urlSecondPreview',

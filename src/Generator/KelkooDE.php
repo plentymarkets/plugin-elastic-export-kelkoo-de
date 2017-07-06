@@ -190,7 +190,7 @@ class KelkooDE extends CSVPluginGenerator
 			'price'				=> $priceList['price'],
 			'brand'				=> $this->elasticExportHelper->getExternalManufacturerName((int)$item['data']['item']['manufacturer']['id'], true),
 			'description'   	=> $this->elasticExportHelper->getMutatedDescription($item, $settings, 300),
-			'image-url'			=> $this->getImageByPosition($item, 1),
+			'image-url'			=> $this->getImageByPosition($item, 0),
 			'ean'				=> $this->elasticExportHelper->getBarcodeByType($item, $settings->get('barcode')),
 			'merchant-category'	=> $this->elasticExportHelper->getSingleCategory((int)$item['data']['defaultCategories'][0]['id'], (string)$settings->get('lang'), (int)$settings->get('plentyId')),
 			'availability'		=> $this->elasticExportHelper->getAvailability($item, $settings, false),
@@ -199,9 +199,9 @@ class KelkooDE extends CSVPluginGenerator
 			'ecotax'			=> '',
 			'mpn'				=> $priceList['recommendedRetailPrice'],
 			'unit-price'		=> $this->elasticExportPriceHelper->getBasePrice($item, $priceList['price']),
-			'image-url-2'		=> $this->getImageByPosition($item, 2),
-			'image-url-3'		=> $this->getImageByPosition($item, 3),
-			'image-url-4'		=> $this->getImageByPosition($item, 4),
+			'image-url-2'		=> $this->getImageByPosition($item, 1),
+			'image-url-3'		=> $this->getImageByPosition($item, 2),
+			'image-url-4'		=> $this->getImageByPosition($item, 3),
 		];
 
 		$this->addCSVContent(array_values($data));
@@ -218,10 +218,29 @@ class KelkooDE extends CSVPluginGenerator
 	 */
 	private function getImageByPosition($item, int $position):string
 	{
+		$images = [];
+		$count = 0;
+
+		// prio 1 - variation images
+		if(is_array($item['data']['images']['variation']) && count($item['data']['images']['variation']) > 0)
+		{
+			foreach($item['data']['images']['variation'] as $image)
+			{
+				if(!array_key_exists($image['position'], $images))
+				{
+					$images[$image['position']] = $image;
+				}
+				else
+				{
+					$count++;
+					$images[$image['position'].'_'.$count] = $image;
+				}
+			}
+		}
+
+		// prio 2 - "all" images
 		if(is_array($item['data']['images']['all']) && count($item['data']['images']['all']) > 0)
 		{
-			$count = 0;
-			$images = [];
 
 			foreach($item['data']['images']['all'] as $image)
 			{
@@ -235,8 +254,11 @@ class KelkooDE extends CSVPluginGenerator
 					$images[$image['position'].'_'.$count] = $image;
 				}
 			}
+		}
 
-			// sort by key
+		// sort by key and return image URL
+		if(count($images))
+		{
 			ksort($images);
 			$images = array_values($images);
 
