@@ -13,9 +13,7 @@ Um dieses Format nutzen zu können, benötigen Sie das Plugin Elastic Export.
 
 Auf der Handbuchseite [Daten exportieren](https://www.plentymarkets.eu/handbuch/datenaustausch/daten-exportieren/#4) werden die einzelnen Formateinstellungen beschrieben.
 
-In der folgenden Tabelle finden Sie spezifische Hinweise zu den Einstellungen, Formateinstellungen und empfohlenen Artikelfiltern für das Format **KelkooDE-Plugin**. 
-
-<table>
+In der folgenden Tabelle finden Sie spezifische Hinweise zu den Einstellungen, Formateinstellungen und empfohlenen Artikelfiltern für das Format **KelkooDE-Plugin**. <table>
     <tr>
         <th>
             Einstellung
