@@ -265,7 +265,7 @@ The following table lists details for settings, format settings and recommended 
 			unit-price
 		</td>
 		<td>
-			The <b>base price information</b> in the format "price / unit". (Example: 10,00 EUR / Kilogramm)
+			The <b>base price information</b> in the format "price / unit". (Example: 10,00 EUR / kilogram)
 		</td>        
 	</tr>
 	<tr>
