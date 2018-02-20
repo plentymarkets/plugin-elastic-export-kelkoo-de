@@ -10,13 +10,13 @@
   "pluginIcon": "icon_plugin_md.png",
   "price": 0.00,
   "shortDescription": {
-    "de": "Das Plugin ElasticExportKelkooDE fügt das Datenformat KelkooDE zum Elastischen Export hinzu.",
-    "en": "This plugin adds the format KelkooDE to the Elastic Export."
+    "de": "Die Integration des Datenformats KelkooDE-Plugin ermöglicht die Artikeldatenübertragung zum Preisportal kelkoo.de über den elastischen Export.",
+    "en": "The integration of the data format KelkooDE-Plugin enables the transfer of item data to the price search engine kelkoo.de via the elastic export."
   },
   "categories": [
     "3523"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "require": ["ElasticExport"],
   "marketplaceName": {
     "de": "Kelkoo.de",
