@@ -5,6 +5,7 @@ namespace ElasticExportKelkooDE\Generator;
 use ElasticExport\Helper\ElasticExportCoreHelper;
 use ElasticExport\Helper\ElasticExportPriceHelper;
 use ElasticExport\Helper\ElasticExportStockHelper;
+use ElasticExport\Services\FiltrationService;
 use Plenty\Modules\DataExchange\Contracts\CSVPluginGenerator;
 use Plenty\Modules\Helper\Services\ArrayHelper;
 use Plenty\Modules\DataExchange\Models\FormatSetting;
@@ -44,6 +45,11 @@ class KelkooDE extends CSVPluginGenerator
 	 */
 	private $arrayHelper;
 
+    /**
+     * @var FiltrationService
+     */
+    private $filtrationService;
+
 	/**
 	 * KelkooDE constructor.
 	 *
@@ -66,6 +72,8 @@ class KelkooDE extends CSVPluginGenerator
 		$this->elasticExportPriceHelper = pluginApp(ElasticExportPriceHelper::class);
 
 		$settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
+		$this->filtrationService = pluginApp(FiltrationService::class, [$settings, $filter]);
+		
 		$this->setDelimiter("	");		// tab
 
 		$this->addCSVContent([
@@ -125,7 +133,7 @@ class KelkooDE extends CSVPluginGenerator
 				{
 					foreach($resultList['documents'] as $item)
 					{
-						if($this->elasticExportStockHelper->isFilteredByStock($item, $filter))
+						if($this->filtrationService->filter($item))
 						{
 							continue;
 						}
