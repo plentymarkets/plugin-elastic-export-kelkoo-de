@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export kelkoo.de
 
+## v1.0.3 (2018-04-27)
+
+### Hinzugefügt
+- Die Tabellen im User Guide wurden erweitert.
+
 ## v1.0.2 (2018-04-19)
 
 ### Geändert
