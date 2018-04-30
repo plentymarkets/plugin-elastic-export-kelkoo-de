@@ -72,7 +72,7 @@ class KelkooDE extends CSVPluginGenerator
 		$this->elasticExportPriceHelper = pluginApp(ElasticExportPriceHelper::class);
 
 		$settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
-		$this->filtrationService = pluginApp(FiltrationService::class, [$settings, $filter]);
+		$this->filtrationService = pluginApp(FiltrationService::class, ['settings' => $settings, 'filterSettings' => $filter]);
 		
 		$this->setDelimiter("	");		// tab
 
