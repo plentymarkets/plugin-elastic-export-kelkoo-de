@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export kelkoo.de
 
+## v1.0.4 (2018-04-30)
+
+### Geändert
+- Laravel 5.5 Update.
+
 ## v1.0.3 (2018-04-27)
 
 ### Hinzugefügt
