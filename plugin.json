@@ -2,7 +2,7 @@
   "name": "ElasticExportKelkooDE",
   "description": "This plugin adds the format KelkooDE to the Elastic Export.",
   "namespace": "ElasticExportKelkooDE",
-  "author": "plentymarkets GmbH",
+  "author": "plentysystems AG",
   "type": "export",
   "authorIcon": "icon_author_xs.png",
   "serviceProvider": "ElasticExportKelkooDE\\ElasticExportKelkooDEServiceProvider",
@@ -16,7 +16,7 @@
   "categories": [
     "3880"
   ],
-  "version": "1.0.6",
+  "version": "1.0.7",
   "require": ["ElasticExport"],
   "marketplaceName": {
     "de": "Kelkoo.de",
