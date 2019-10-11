@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export kelkoo.de
 
+## v1.0.7 (2019-10-10)
+
+### Changed
+- The user guide was updated (changed form of address, corrected broken links).
+
 ## v1.0.6 (2019-01-22)
 
 ### Changed
