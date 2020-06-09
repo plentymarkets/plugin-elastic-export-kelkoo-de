@@ -16,7 +16,7 @@
   "categories": [
     "3880"
   ],
-  "version": "1.0.7",
+  "version": "1.0.8",
   "require": ["ElasticExport"],
   "marketplaceName": {
     "de": "Kelkoo.de",

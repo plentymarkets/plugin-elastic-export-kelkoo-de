@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export kelkoo.de
 
+## v1.0.8 (2020-06-09)
+
+### Geändert
+- Die Plugin-Beschreibung wurde gelöscht und stattdessen ein Link zum plentymarkets Handbuch eingefügt.
+
 ## v1.0.7 (2019-10-10)
 
 ### Geändert

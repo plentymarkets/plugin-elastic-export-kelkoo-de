@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export kelkoo.de
 
+## v1.0.8 (2020-06-09)
+
+### Changed
+- Deleted the plugin description and inserted link to plentymarkets manual instead.
+
 ## v1.0.7 (2019-10-10)
 
 ### Changed
@@ -37,6 +42,6 @@
 - Updated plugin short description.
 
 ## v1.0.0 (2017-07-03)
- 
+
 ### Added
 - Added initial plugin files
