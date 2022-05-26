@@ -120,7 +120,7 @@ class KelkooDE extends CSVPluginGenerator
 					'Elastic Search duration' => microtime(true) - $esStartTime,
 				]);
 
-				if(count($resultList['error']) > 0)
+				if(count($resultList['error'] ?? []) > 0)
 				{
 					$this->getLogger(__METHOD__)->error('ElasticExportKelkooDE::log.occurredElasticSearchErrors', [
 						'error message' => $resultList['error'],
@@ -129,7 +129,7 @@ class KelkooDE extends CSVPluginGenerator
 
 				$buildRowStartTime = microtime(true);
 
-				if(is_array($resultList['documents']) && count($resultList['documents']) > 0)
+				if(is_array($resultList['documents']) && count($resultList['documents'] ?? []) > 0)
 				{
 					foreach($resultList['documents'] as $item)
 					{
@@ -230,7 +230,7 @@ class KelkooDE extends CSVPluginGenerator
 		$count = 0;
 
 		// prio 1 - variation images
-		if(is_array($item['data']['images']['variation']) && count($item['data']['images']['variation']) > 0)
+		if(is_array($item['data']['images']['variation']) && count($item['data']['images']['variation'] ?? []) > 0)
 		{
 			foreach($item['data']['images']['variation'] as $image)
 			{
@@ -247,7 +247,7 @@ class KelkooDE extends CSVPluginGenerator
 		}
 
 		// prio 2 - "all" images
-		if(is_array($item['data']['images']['all']) && count($item['data']['images']['all']) > 0)
+		if(is_array($item['data']['images']['all']) && count($item['data']['images']['all'] ?? []) > 0)
 		{
 
 			foreach($item['data']['images']['all'] as $image)
@@ -265,7 +265,7 @@ class KelkooDE extends CSVPluginGenerator
 		}
 
 		// sort by key and return image URL
-		if(count($images))
+		if(count($images ?? []))
 		{
 			ksort($images);
 			$images = array_values($images);
