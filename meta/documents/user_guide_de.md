@@ -2,7 +2,13 @@
 # User Guide für das ElasticExportKelkooDE Plugin
 
 <div class="alert alert-info" role="alert">
-  Wie du das Plugin in plentymarkets einrichtest, <a href="https://knowledge.plentymarkets.com/maerkte/preisportale/kelkoo" target="_blank">ist im plentymarkets Handbuch beschrieben</a>.
+Katalogexport jetzt für Kelkoo verfügbar
+ 
+Artikeldaten können jetzt per Katalogexport an Kelkoo übertragen werden. Dafür wird kein Plugin mehr benötigt. Du kannst den <a href="https://knowledge.plentymarkets.com/de-de/manual/main/maerkte/kelkoo.html#catalogue-export" target="_blank">Katalog also direkt in deinem plentymarkets System erstellen</a>, ohne dieses Plugin installieren zu müssen.
+ 
+Dieses Plugin verwendet den Elastischen Export. Deshalb benötigst du zusätzlich zu diesem Plugin außerdem das Plugin **Elastischer Export**. Beachte aber, dass der Elastische Export und die Exportformate nicht mehr weiterentwickelt werden. Wir empfehlen dir deshalb, für den Artikeldatenexport Kataloge zu erstellen.
+ 
+Beide Möglichkeiten, Kelkoo in plentymarkets einzurichten, <a href="https://knowledge.plentymarkets.com/de-de/manual/main/maerkte/kelkoo.html" target="_blank">sind im plentymarkets Handbuch beschrieben</a>.
 </div>
 
 ## Lizenz
